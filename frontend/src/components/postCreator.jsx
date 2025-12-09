@@ -12,12 +12,12 @@ export default function Create({createPost}) {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <input
-                type="text"
+            <textarea
+                type="textarea"
                 value={postField}
                 onChange={(e) => setPostField(e.target.value)}
                 placeholder="spit it out!"
-            ></input>
+            ></textarea>
             <button type="submit">Create</button>
         </form>
     )
