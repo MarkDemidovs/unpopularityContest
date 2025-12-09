@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import API from "./api/axiosConfig";
+import Create from "./components/postCreator";
 
 export default function App() {
   const [posts, setPosts] = useState([]);
@@ -17,6 +18,10 @@ export default function App() {
     fetchPosts();
   }, [])
 
+  const createPost = async () => {
+    
+  }
+
   return (
     <>
       <div>
@@ -30,6 +35,8 @@ export default function App() {
           ))}
         </ul>
       </div>
+
+      <Create createPost={createPost}/>
     </>
   )
 }
