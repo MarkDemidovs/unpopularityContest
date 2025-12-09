@@ -18,8 +18,12 @@ export default function App() {
     fetchPosts();
   }, [])
 
-  const createPost = async () => {
-    
+  const createPost = async (content) => {
+    try {
+      await API.post(`/post`, { content })
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (
