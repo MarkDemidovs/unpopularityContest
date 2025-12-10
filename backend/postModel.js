@@ -10,7 +10,13 @@ const createAPost = async({content}) => {
     return result.rows[0];
 }
 
+const ratioSystem = async (id, voteType) => {
+    const result = await db.query("UPDATE posts SET ratio = ratio + $1 WHERE id = $2 RETURNING *", [voteType, id]);
+    return result.rows[0];
+}
+
 module.exports = {
     getAllPosts,
-    createAPost
+    createAPost,
+    ratioSystem
 }

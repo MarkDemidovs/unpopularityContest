@@ -23,8 +23,23 @@ const createPost = async (req, res) => {
     }
 }
 
+const ratioSystem = async (req, res) => {
+    const { id } = req.params;
+    const { voteType } = req.body
+
+    if (!voteType || !id) return res.status(400).json({ error: "Missing voteType or id"});
+
+
+    try {
+        const updatedPost = await postModel.ratioSystem(id, voteType);
+        res.status(201).json({ post: updatedPost });
+    } catch (err) {
+        res.status(500).json({ error: "Failed to process vote: " + err.message });
+    }
+}
 
 module.exports = {
     getAllPosts,
-    createPost
+    createPost,
+    ratioSystem
 };

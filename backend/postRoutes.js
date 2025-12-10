@@ -6,4 +6,7 @@ router.get('/', postController.getAllPosts);
 router.post("/post", postController.createPost);
 
 
+router.patch("/post/:id", postController.ratioSystem);
+
+
 module.exports = router;
