@@ -34,6 +34,10 @@ export default function App() {
             <li key={index}>
               <p>
                 {post.content}
+                <br></br>
+                {post.ratio}
+                <button>Upvote</button>
+                <button>Downvote</button>
               </p>
             </li>
           ))}
