@@ -5,9 +5,25 @@ const getAllPosts = async() => {
     return result.rows;
 }
 
-const createAPost = async({content}) => {
-    const result = await db.query("INSERT INTO posts (content) VALUES ($1) RETURNING *", [content])
-    return result.rows[0];
+const createAPost = async ({ content }) => {
+  const result = await db.query(
+    "INSERT INTO posts (content) VALUES ($1) RETURNING *",
+    [content]
+  );
+
+  await db.query(
+    `
+      DELETE FROM posts
+      WHERE id IN (
+        SELECT id
+        FROM posts
+        ORDER BY id ASC
+        LIMIT (SELECT GREATEST(COUNT(*) - 50, 0) FROM posts)
+      )
+    `
+  );
+
+  return result.rows[0];
 }
 
 const ratioSystem = async (id, voteType) => {
